@@ -15,6 +15,8 @@ function App() {
 
   return (
     <>
+    <div className="notebook-page">
+      <div className="notebook-circles"></div>
       <Routes>
         <Route element={<MainLayout />}>
           <Route index element={<Home />} />
@@ -25,7 +27,7 @@ function App() {
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
-
+    </div>
     </>
   )
 }
