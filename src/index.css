@@ -30,6 +30,9 @@
   --font-handwriting: 'Caveat', 'Segoe UI', cursive;
   --font-mono: 'Courier New', 'SF Mono', monospace;
   --font-sans: 'Segoe UI', 'Roboto', system-ui, sans-serif;
+  
+  /* Altura del header (ajusta este valor según necesites) */
+  --header-height: 150px;
 }
 
 * {
@@ -53,15 +56,14 @@ body {
   background: var(--notebook-bg);
   min-height: 100vh;
   margin: 0 2rem;
-  box-shadow: var(--shadow-sticky-heavy);
   z-index: 1;
 }
 
-/* Patrón de cuadrícula DINÁMICO (se desplaza con el contenido) */
+/* Patrón de cuadrícula - EMPIEZA DESPUÉS DEL HEADER */
 .notebook-page::before {
   content: '';
   position: absolute;
-  top: 0;
+  top: var(--header-height); /* Comienza después del header */
   left: 0;
   right: 0;
   bottom: 0;
@@ -73,11 +75,11 @@ body {
   z-index: 0;
 }
 
-/* Línea rosa del margen izquierdo (fija dentro de la hoja) */
+/* Línea rosa del margen izquierdo - EMPIEZA DESPUÉS DEL HEADER */
 .notebook-page::after {
   content: '';
   position: absolute;
-  top: 0;
+  top: var(--header-height); /* Comienza después del header */
   left: 110px;
   bottom: 0;
   width: 2px;
@@ -88,10 +90,11 @@ body {
   pointer-events: none;
   z-index: 1;
 }
-/* Círculos grises en el margen izquierdo - TAMAÑO 18px con salto 18px */
+
+/* Círculos grises en el margen izquierdo - EMPIEZAN DESPUÉS DEL HEADER */
 .notebook-circles {
   position: absolute;
-  top: 0;
+  top: var(--header-height); /* Comienza después del header */
   left: 50px;
   bottom: 0;
   width: 20px;
@@ -106,11 +109,12 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
-  background: radial-gradient(circle at center, #b8c4d8 9px, transparent 9px);
+  background: radial-gradient(circle at center, var(--wall-bg) 9px, transparent 9px);
   background-size: 34px 34px;
   background-position: -7px 18px;
   background-repeat: repeat-y;
 }
+
 /* Main Layout - todo dentro de la página de cuaderno */
 main {
   max-width: 900px;
@@ -125,11 +129,13 @@ main > :nth-child(2) {
   flex: 1;
 }
 
-/* ============ HEADER - TÍTULO POST-IT ============ */
+/* ============ HEADER - TÍTULO POST-IT (SIN CUADRÍCULA) ============ */
 header {
   position: relative;
   margin-bottom: 3rem;
   padding-top: 1rem;
+  background: var(--wall-bg); /* Fondo sólido para tapar cuadrícula */
+  z-index: 10;
 }
 
 /* Título Post-it flotante */
@@ -157,7 +163,7 @@ header h1::before {
   top: -8px;
   left: 30%;
   width: 40%;
-  height: 14px;
+  height: 30px;
   background: rgba(160, 140, 100, 0.3);
   border-radius: 2px;
   transform: rotate(-2deg);
@@ -489,6 +495,11 @@ a {
   
   h2 {
     font-size: 1.4rem;
+  }
+  
+  /* Ajustamos la altura del header en móvil */
+  :root {
+    --header-height: 220px;
   }
 }
 
