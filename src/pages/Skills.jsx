@@ -1,9 +1,9 @@
 function Skills() {
     return (
-        <main>
-            <h1>Skills</h1>
+        <div>
+            <h1>Habilidades</h1>
             <p>Estas son mis habilidades.</p>
-        </main>
+        </div>
     );
 }   
 
