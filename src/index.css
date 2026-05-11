@@ -2,7 +2,7 @@
 
 :root {
   /* Colores pared */
-  --wall-bg: #d4d9e6;
+  --wall-bg: #dde0e7;
   --wall-shadow: rgba(0,0,0,0.05);
   
   /* Colores libreta */
@@ -32,7 +32,8 @@
   --font-sans: 'Segoe UI', 'Roboto', system-ui, sans-serif;
   
   /* Altura del header (ajusta este valor según necesites) */
-  --header-height: 150px;
+  --header-height: 170px;
+  font-size: 18px;
 }
 
 * {
@@ -48,6 +49,7 @@ body {
   line-height: 1.6;
   position: relative;
   min-height: 100vh;
+  font-size: 18px;
 }
 
 /* Contenedor de la hoja de libreta (se desplaza con el contenido) */
@@ -524,4 +526,14 @@ a {
   section {
     page-break-inside: avoid;
   }
+}
+
+/* Añade esto al final de tu CSS */
+.notebook-page {
+  background: linear-gradient(
+    to bottom,
+    transparent 0px,
+    transparent var(--header-height),
+    var(--notebook-bg) var(--header-height)
+  );
 }
