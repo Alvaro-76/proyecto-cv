@@ -574,12 +574,14 @@ a {
 
 /* FORMULARIO estilo post-it */
 .contact-form {
-  background: var(--postit-yellow);
+  background: #fff9c4d5;
   padding: 2rem;
   width: 420px;
   min-height: 320px;
 
-  box-shadow: var(--shadow-postit);
+  box-shadow:
+  0 6px 10px rgba(0, 0, 0, 0.10),
+  0 18px 30px rgba(0, 0, 0, 0.15);
   font-family: var(--font-handwriting);
 
   display: flex;
@@ -588,12 +590,12 @@ a {
 
   transform: rotate(var(--rotate, -2deg));
 
-  /* efecto libreta */
+  /* efecto libreta 
   background-image: linear-gradient(
     to bottom,
     rgba(0, 0, 0, 0.03) 1px,
     transparent 1px
-  );
+  );*/
   background-size: 100% 24px;
 
   position: relative;
