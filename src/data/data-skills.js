@@ -1,52 +1,52 @@
 export const skills = [
     {
-        skillsid: 1,
-        name: "JavaScript",        
-        category: "programming"
+        id: 1,
+        name: "JavaScript",
+        category: "Frontend"
     },
     {
-        skillsid: 2,
+        id: 2,
         name: "HTML",
-        category: "programming"
+        category: "Frontend"
     },
     {
-        skillsid: 3,
+        id: 3,
         name: "CSS",
-        category: "programming" 
+        category: "Frontend"
     },
     {
-        skillsid: 4,
+        id: 4,
         name: "React",
-        category: "programming"
+        category: "Frontend"
     },
     {
-        skillsid: 5,    
-        name: "Angular.js",
-        category: "programming"
-    },  
+        id: 5,
+        name: "Angular",
+        category: "Frontend"
+    },
     {
-        skillsid: 6,
+        id: 6,
         name: "Java",
-        category: "programming"
+        category: "Backend"
     },
     {
-        skillsid: 7,
-        name: "Adobe Photoshop",
-        category: "design"
-    },
-    {
-        skillsid: 8,
-        name: "Blender 3D",
-        category: "design"
-    },
-    {
-        skillsid: 9,
+        id: 7,
         name: "PHP",
-        category: "programming"
+        category: "Backend"
     },
     {
-        skillsid: 10,
+        id: 8,
         name: "MySQL",
-        category: "programming"
+        category: "Database"
+    },
+    {
+        id: 9,
+        name: "Adobe Photoshop",
+        category: "Design"
+    },
+    {
+        id: 10,
+        name: "Blender",
+        category: "Design"
     }
-]
+];
