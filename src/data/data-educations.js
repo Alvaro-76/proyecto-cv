@@ -4,7 +4,7 @@ export const education = [
         title: "FP II - Informática de Gestión",
         institution: "I.E.S. Guadalpín",
         dateStar: "15/09/1992",
-        dateEnd: "30/06/1994"
+        dateEnd: "30/06/1995"
     },
     {
         id: 2,
