@@ -6,5 +6,6 @@ export const about = {
         address: "Marbella (Málaga)",
         itchio: "https://kodaygames.itch.io/",
         github: "https://github.com/Alvaro-76",
-        blog: "https://devcpp-allegro.blogspot.com/"    
+        blog: "https://devcpp-allegro.blogspot.com/",
+        linkedin: "https://linkedin.com/in/alvaro-blanco-alarcon-4f2019/",  
     }
