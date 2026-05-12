@@ -211,7 +211,6 @@ header .subtitle {
   cursor: pointer;
   border-bottom: none;
   
-  /* La base de todos los marcadores - parte inferior FIJA */
   transform-origin: bottom;
   transform: scaleY(0.65);
 }
@@ -310,7 +309,8 @@ h3 {
 }
 
 /* Sección de contacto */
-section:first-child p {
+/* section:first-child p */
+.resaltado p{
   font-family: var(--font-mono);
   font-size: 0.85rem;
   padding: 0.75rem;
@@ -396,14 +396,15 @@ section:first-child p {
   display: inline-block;
   background: var(--postit-pink);
   color: var(--text-dark);
-  padding: 0.3rem 1rem;
+  padding: 0.4rem 1.1rem;
   border-radius: 20px;
-  font-size: 0.75rem;
+  font-size: 1.15rem;
   font-family: var(--font-handwriting);
   margin: 0.25rem;
   transition: all 0.2s ease;
   box-shadow: var(--shadow-postit);
   cursor: default;
+  border: 1px solid rgba(0,0,0,0.1);
 }
 
 .skill-tag:hover {
