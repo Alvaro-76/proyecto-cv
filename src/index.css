@@ -34,9 +34,6 @@
   --font-handwriting: 'Caveat', 'Segoe UI', cursive;
   --font-mono: 'Courier New', monospace;
   --font-sans: 'Segoe UI', system-ui, sans-serif;
-
-  /* Altura estimada del header (para la máscara de cuadrícula) */
-  --header-height: 170px;
 }
 
 body {
@@ -50,12 +47,11 @@ body {
 /* Contenedor de la libreta (pared + hoja) */
 .notebook-page {
   position: relative;
-  background: var(--notebook-bg);
+  background: var(--wall-bg);   /* fondo pared */
   min-height: 100vh;
-  max-width: 1100px;
-  margin-left: auto;
-  margin-right: auto;
-  margin: 0 1rem;   /* espacio lateral en móvil */
+  display: flex;
+  flex-direction: column;
+  margin: 0 1rem;
   z-index: 1;
 }
 
@@ -66,14 +62,6 @@ body {
   max-width: 1100px;  
   margin: 0 auto;
   padding: 1rem;
-}
-
-.notebook-page {
-  background: var(--wall-bg);   /* fondo pared solo visible en los bordes */
-  min-height: 100vh;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
 }
 
 /* ===== Contenedor del contenido con fondo libreta ===== */
@@ -87,8 +75,8 @@ body {
   overflow: hidden;
   display: flex;          
   flex-direction: column;
-}
 
+}
 
 /* ===== Cuadrícula (fondo) ===== */
 .notebook-content::before {
@@ -442,11 +430,6 @@ h3 {
   box-shadow: var(--shadow-sticky);
 }
 
-/* Si sigues usando .resaltado, puedes mantenerlo como alias */
-.resaltado {
-  composes: card; /* si usas CSS modules, sino copia los mismos estilos */
-}
-/* Para mantener compatibilidad sin composes: */
 .resaltado {
   /* background: var(--postit-yellow); */
   padding: 1.2rem 1.5rem;
@@ -506,22 +489,21 @@ h3 {
   position: relative;
 }
 .contact-form {
-  background: #fff9c4e8;
-  padding: 2rem;
-  width: 420px;
-  min-height: 320px;
+  padding: 1.5rem;
+  width: 400px;
+  min-height: 300px;
   box-shadow: 0 6px 10px rgba(0,0,0,0.10), 0 18px 30px rgba(0,0,0,0.15);
   font-family: var(--font-handwriting);
   display: flex;
   flex-direction: column;
-  gap: 0.6rem;
+  gap: 0.4rem;
   transform: rotate(var(--rotate, -2deg));
   background-size: 100% 24px;
   position: relative;
   transition: transform 0.3s ease;
-    background: 
-    linear-gradient(to top, var(--postit-yellow), transparent),
-    #fff9c4d5;  /* color base semitransparente */
+  background: 
+  linear-gradient(to top, var(--postit-yellow), transparent),
+  #fff9c4e8;  /* color base semitransparente */
 }
 .contact-form::before {
   content: "";
@@ -600,7 +582,7 @@ section {
 
 /* ===== FOOTER estilo libreta ===== */
 footer {
-  margin-top: 2rem;
+  margin-top: auto;
   padding: 1rem 1.5rem;
   background: rgba(255, 255, 255, 0.7);  /* semitransparente para que se vea la cuadrícula */
   border-top: 2px dashed var(--notebook-grid);
