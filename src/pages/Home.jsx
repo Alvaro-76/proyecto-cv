@@ -4,7 +4,7 @@ import { about } from "../data/data-about"
 function Home() {
   return (
     <div>
-      <section>
+      <section className="resaltado">
         <h1>{about.name}</h1>
         <p>{about.email} | Fecha Nacimiento: {about.date} | {about.address}</p>
       </section>
