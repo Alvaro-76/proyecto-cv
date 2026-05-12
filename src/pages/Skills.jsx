@@ -29,9 +29,13 @@ function Skills() {
 
                         <div className="skills">
                             {skills.map((skill) => (
-                                <span key={skill.id} className="skill-tag">
-                                    {skill.name}
-                                </span>
+                                <span
+  key={skill.id}
+  className="skill-tag"
+  style={{ "--r": `${Math.random() * 6 - 3}deg` }}
+>
+  {skill.name}
+</span>
                             ))}
                         </div>
                     </section>
