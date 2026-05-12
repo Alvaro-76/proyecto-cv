@@ -31,6 +31,11 @@ function Home() {
             {about.blog}
           </a>
         </p>
+        <p>
+          <a href={about.linkedin} target="_blank" rel="noopener noreferrer">
+            {about.linkedin}
+          </a>
+        </p>
       </section>
     </div>
   )
