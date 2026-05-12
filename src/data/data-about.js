@@ -7,5 +7,5 @@ export const about = {
         itchio: "https://kodaygames.itch.io/",
         github: "https://github.com/Alvaro-76",
         blog: "https://devcpp-allegro.blogspot.com/",
-        linkedin: "https://linkedin.com/in/alvaro-blanco-alarcon-4f2019/",  
+        linkedin: "https://linkedin.com/in/alvaro-blanco-alarcon-4f2019/"  
     }
