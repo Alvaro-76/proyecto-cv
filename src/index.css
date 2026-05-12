@@ -57,7 +57,7 @@ body {
   position: relative;
   background: var(--notebook-bg);
   min-height: 100vh;
-  margin: 0 2rem;
+  margin: 0 3rem 0 4rem;
   z-index: 1;
 }
 
@@ -394,17 +394,12 @@ h3 {
 /* Skill tags */
 .skill-tag {
   display: inline-block;
-  background: var(--postit-pink);
-  color: var(--text-dark);
-  padding: 0.4rem 1.1rem;
-  border-radius: 20px;
-  font-size: 1.15rem;
+  background: var(--postit-yellow);
+  padding: 0.4rem 0.7rem;
+  margin: 0.3rem;
   font-family: var(--font-handwriting);
-  margin: 0.25rem;
-  transition: all 0.2s ease;
   box-shadow: var(--shadow-postit);
-  cursor: default;
-  border: 1px solid rgba(0,0,0,0.1);
+  transform: rotate(var(--r, -2deg));
 }
 
 .skill-tag:hover {
@@ -537,4 +532,143 @@ a {
     transparent var(--header-height),
     var(--notebook-bg) var(--header-height)
   );
+}
+
+.contact-form {
+  background: var(--postit-yellow);
+  padding: 2rem;
+  
+  /* tamaño: más ancho que alto */
+  width: 420px;
+  min-height: 320px;
+
+  box-shadow: var(--shadow-postit);
+  font-family: var(--font-handwriting);
+  transform: rotate(-1deg);
+
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+
+  /* centrado del contenido interno */
+  justify-content: center;
+
+  /* efecto libreta */
+  background-image: linear-gradient(to bottom, rgba(0,0,0,0.03) 1px, transparent 1px);
+  background-size: 100% 24px;
+}
+
+.page {
+  display: flex;
+  flex-direction: column;
+  min-height: 50vh;
+}
+.contact-form-wrapper {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem 1rem;
+  position: relative;
+}
+
+/* FORMULARIO estilo post-it */
+.contact-form {
+  background: var(--postit-yellow);
+  padding: 2rem;
+  width: 420px;
+  min-height: 320px;
+
+  box-shadow: var(--shadow-postit);
+  font-family: var(--font-handwriting);
+
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+
+  transform: rotate(var(--rotate, -2deg));
+
+  /* efecto libreta */
+  background-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.03) 1px,
+    transparent 1px
+  );
+  background-size: 100% 24px;
+
+  position: relative;
+  transition: transform 0.3s ease;
+}
+
+/* CINTA ADHESIVA (correctamente anclada al form) */
+.contact-form::before {
+  content: "";
+  position: absolute;
+
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-2deg);
+
+  width: 70%;
+  height: 35px;
+
+  background: rgba(160, 140, 100, 0.3);
+
+  border-radius: 2px;
+  z-index: 2;
+}
+
+/* LABELS estilo boli azul */
+.contact-form label {
+  font-size: 0.9rem;
+  color: #1e3a8a;
+  margin-top: 0.5rem;
+}
+
+/* INPUTS estilo libreta */
+.contact-form input,
+.contact-form textarea {
+  border: none;
+  background: transparent;
+  border-bottom: 1px solid rgba(30, 58, 138, 0.4);
+  outline: none;
+
+  font-family: var(--font-handwriting);
+  font-size: 1rem;
+  color: #1e3a8a;
+
+  padding: 0.2rem 0;
+}
+
+/* textarea más natural */
+.contact-form textarea {
+  min-height: 100px;
+  resize: none;
+  line-height: 1.5;
+}
+
+/* placeholder suave */
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+  color: rgba(30, 58, 138, 0.4);
+  font-family: var(--font-handwriting);
+}
+
+/* botón estilo escrito a mano */
+.contact-form input[type="submit"] {
+  margin-top: 1rem;
+  background: transparent;
+  border: none;
+
+  color: #1e3a8a;
+  font-family: var(--font-handwriting);
+  font-size: 1.1rem;
+
+  cursor: pointer;
+  text-align: right;
+}
+
+/* hover suave */
+.contact-form input[type="submit"]:hover {
+  transform: translateX(3px);
 }
