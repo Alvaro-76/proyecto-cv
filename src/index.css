@@ -494,11 +494,11 @@ a {
   h2 {
     font-size: 1.4rem;
   }
-  
-  /* Ajustamos la altura del header en móvil */
+
   :root {
     --header-height: 220px;
   }
+  
 }
 
 /* ============ PRINT ============ */
@@ -524,7 +524,6 @@ a {
   }
 }
 
-/* Añade esto al final de tu CSS */
 .notebook-page {
   background: linear-gradient(
     to bottom,
