@@ -10,7 +10,7 @@ function Home() {
       </section>
 
       <section>
-        <h2>Sobre mi</h2>
+        <h2>Sobre mí</h2>
         <p>{about.description}</p>
       </section>
       

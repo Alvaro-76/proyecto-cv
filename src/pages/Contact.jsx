@@ -7,9 +7,11 @@ function Contact() {
 
     return (
         <div className="page">
-            <h1>Contacto</h1>
-            <p>Puedes escribirme para resolver cualquier duda.</p>
-
+            <section>
+                <h1>Contacto</h1>
+                <p>Puedes escribirme para resolver cualquier duda.</p>
+            </section>
+            
             <div className="contact-form-wrapper">
                 <form
                     onSubmit={handleSubmit}

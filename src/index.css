@@ -4,81 +4,75 @@
   box-sizing: border-box;
 }
 
-/* Mis variables */
+/* ===== VARIABLES ===== */
 :root {
-  /* Fondos */
-  --wall-bg: #dde0e7;          /* pared de fondo */
-  --notebook-bg: #f5f7fc;      /* hoja de libreta */
+  --wall-bg: #dde0e7;
+  --notebook-bg: #f5f7fc;
+  --notebook-grid: #d0d8e8;
+  --notebook-line: #f5a9b8;
 
-  /* Elementos de la libreta */
-  --notebook-grid: #d0d8e8;    /* líneas de cuadrícula */
-  --notebook-line: #f5a9b8;    /* línea rosa del margen */
-
-  /* Post-its */
   --postit-yellow: #fff9c4;
   --postit-pink: #ffd1dc;
   --postit-blue: #d4f1f9;
   --postit-green: #d9f0e1;
   --postit-orange: #ffe0b5;
 
-  /* Texto */
-  --text-dark: #2c3e50;
-  --text-gray: #5a6c7e;
+  --text-dark: #1a2c3e;
+  --text-gray: #3a4c5e;
 
-  /* Sombras */
   --shadow-postit: 2px 2px 5px rgba(0,0,0,0.08);
   --shadow-sticky: 0 6px 12px rgba(0,0,0,0.1);
   --fiso: rgba(160, 140, 100, 0.35);
 
-  /* Fuentes */
   --font-handwriting: 'Caveat', 'Segoe UI', cursive;
   --font-mono: 'Courier New', monospace;
   --font-sans: 'Segoe UI', system-ui, sans-serif;
 }
 
+/* ===== ESTILOS BASE ===== */
 body {
   background: var(--wall-bg);
   font-family: var(--font-sans);
   color: var(--text-dark);
-  /* line-height: 1.5; */
   min-height: 100vh;
+  font-size: 1.2rem; 
 }
 
-/* Contenedor de la libreta (pared + hoja) */
+/* ===== LAYOUT PRINCIPAL ===== */
 .notebook-page {
   position: relative;
-  background: var(--wall-bg);   /* fondo pared */
+  background: var(--wall-bg);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   margin: 0 1rem;
   z-index: 1;
+  transition: margin 0.3s ease;
 }
 
 .page-content {
   flex: 1;
   position: relative;
-  z-index: 5;       
-  max-width: 1100px;  
+  z-index: 5;
+  max-width: 1100px;
   margin: 0 auto;
   padding: 1rem;
 }
 
-/* ===== Contenedor del contenido con fondo libreta ===== */
 .notebook-content {
-  flex: 1;                     /* ocupa el espacio restante debajo del header */
+  flex: 1;
   background: var(--notebook-bg);
-  margin: 0 1rem;             
+  margin: 0 1rem;
   position: relative;
   z-index: 1;
-  border-radius: 0 12px 0 0;   /* solo esquina superior derecha */
+  border-radius: 0 12px 0 0;
   overflow: hidden;
-  display: flex;          
+  display: flex;
   flex-direction: column;
-
+  transition: margin 0.3s ease;
 }
 
-/* ===== Cuadrícula (fondo) ===== */
+/* Cuadrícula */
 .notebook-content::before {
   content: '';
   position: absolute;
@@ -94,12 +88,12 @@ body {
   z-index: 0;
 }
 
-/* ===== Línea rosa del margen ===== */
+/* Línea rosa */
 .notebook-content::after {
   content: '';
   position: absolute;
   top: 0;
-  left: 110px;               /* distancia desde el borde izquierdo */
+  left: 110px;
   bottom: 0;
   width: 2px;
   background: var(--notebook-line);
@@ -107,18 +101,20 @@ body {
   background-size: 3px 20px;
   pointer-events: none;
   z-index: 1;
+  transition: left 0.2s ease;
 }
 
+/* Círculos (anillas) */
 .notebook-circles {
   position: absolute;
   top: 0;
-  left: 38px;                /* posición de los círculos */
+  left: 38px;
   bottom: 0;
   width: 20px;
   pointer-events: none;
   z-index: 2;
+  transition: left 0.2s ease;
 }
-
 .notebook-circles::before {
   content: '';
   position: absolute;
@@ -132,20 +128,18 @@ body {
   background-repeat: repeat-y;
 }
 
-/* Header - fondo pared y posición relativa */
+/* ===== HEADER ===== */
 header {
   background: var(--wall-bg);
   position: relative;
   z-index: 20;
   padding: 1rem 1rem 0 1rem;
-  margin-bottom: 0; /* para que pegue con .notebook-content */
+  margin-bottom: 0;
 }
-
-/* Título principal (post‑it amarillo) */
 header h1 {
   background: var(--postit-yellow);
   display: inline-block;
-  padding: 0.6rem 1.8rem;
+  padding: 1.2rem 0.8rem;
   font-family: var(--font-handwriting);
   font-size: 2rem;
   font-weight: normal;
@@ -155,8 +149,6 @@ header h1 {
   position: relative;
   margin-bottom: auto;
 }
-
-/* Cinta adhesiva encima del post‑it */
 header h1::before {
   content: '';
   position: absolute;
@@ -167,8 +159,6 @@ header h1::before {
   background: var(--fiso);
   transform: rotate(-2deg);
 }
-
-/* Subtítulo (opcional) */
 header .subtitle {
   font-family: var(--font-handwriting);
   font-size: 1rem;
@@ -179,7 +169,7 @@ header .subtitle {
   font-style: italic;
 }
 
-/* Contenedor centrado */
+/* ===== NAVBAR (marcadores) ===== */
 .navbar {
   display: flex;
   flex-wrap: wrap;
@@ -189,42 +179,36 @@ header .subtitle {
   padding: 0 1rem;
   align-items: flex-end;
 }
-
-/* Base de cada marcador */
 .navbar__link {
   color: var(--text-dark);
   text-decoration: none;
   padding: 0.5rem 1.5rem;
   font-family: var(--font-handwriting);
-  font-size: 1rem;
-  font-weight: 500;
+  font-size: 1.05rem;
+  font-weight: 600;
   border-radius: 8px 8px 0 0;
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-  margin-right: 4px;
-  /* Sombra exterior y sombra interior para simular degradado superior */
-  box-shadow: 0 -2px 6px rgba(0,0,0,0.1), inset 0 10px 8px -8px rgba(0,0,0,0.25);
+  margin-right: 0;
+  box-shadow: 0 -2px 6px rgba(0,0,0,0.1), inset 0 10px 8px -8px rgba(0,0,0,0.15);
   cursor: pointer;
   transform-origin: bottom;
   transform: scaleY(0.7);
   border-bottom: none;
   position: relative;
+  text-shadow: 0 1px 0 rgba(255,255,255,0.3);
 }
-
-/* Colores específicos de cada pestaña (se mantienen siempre) */
+/* Colores de fondo por orden */
 .navbar__link:nth-child(1) { background-color: var(--postit-pink); }
 .navbar__link:nth-child(2) { background-color: var(--postit-yellow); }
 .navbar__link:nth-child(3) { background-color: var(--postit-green); }
 .navbar__link:nth-child(4) { background-color: var(--postit-blue); }
 .navbar__link:nth-child(5) { background-color: var(--postit-orange); }
 
-/* Hover: se estira y la sombra interior se reduce (menos degradado) */
 .navbar__link:hover {
   transform: scaleY(0.9);
   box-shadow: 0 -4px 10px rgba(0,0,0,0.12), inset 0 4px 6px -4px rgba(0,0,0,0.15);
   z-index: 25;
 }
-
-/* Activo: completamente estirado, sin sombra interior (degradado desaparece), más brillo */
 .navbar__link.active {
   transform: scaleY(1);
   box-shadow: 0 -6px 14px rgba(0,0,0,0.15), inset 0 1px 0 rgba(255,255,255,0.6);
@@ -232,7 +216,7 @@ header .subtitle {
   z-index: 30;
 }
 
-/* Sombra inferior (efecto de profundidad) */
+/* Sombra inferior profundidad */
 .navbar__link::after {
   content: '';
   position: absolute;
@@ -247,7 +231,6 @@ header .subtitle {
   opacity: 0.5;
   pointer-events: none;
 }
-
 .navbar__link.active::after {
   opacity: 1;
   bottom: -7px;
@@ -255,13 +238,12 @@ header .subtitle {
   left: 7.5%;
   filter: blur(5px);
 }
-
 .navbar__link:hover::after {
   opacity: 0.8;
   bottom: -7px;
 }
 
-/* Título principal de cada página */
+/* ===== TIPOGRAFÍA Y TÍTULOS ===== */
 .page-title {
   font-family: var(--font-handwriting);
   font-size: 2rem;
@@ -270,27 +252,103 @@ header .subtitle {
   padding-left: 1rem;
   color: var(--text-dark);
 }
-
-/* Títulos de sección (h2, h3) */
 h2, h3 {
   font-family: var(--font-handwriting);
   color: var(--text-dark);
 }
-
 h2 {
   font-size: 1.6rem;
   margin: 1rem 0 0.5rem 0;
   border-bottom: 1px dashed var(--notebook-line);
   display: inline-block;
 }
-
 h3 {
   font-size: 1.2rem;
   margin: 0.8rem 0 0.4rem;
 }
 
-/* links-section */
+/* ===== BLOQUES DE CONTENIDO ===== */
+section {
+  background: transparent;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+.card, .resaltado {
+  padding: 1.2rem 1.5rem;
+  margin-bottom: 1.5rem;
+  border-radius: 6px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  position: relative;
+}
 
+/* Colores para .card (si se usa) */
+.card:nth-child(odd) { background: var(--postit-green); }
+.card:nth-child(even) { background: var(--postit-blue); }
+/* .resaltado sin color de fondo por defecto (fondo transparente) */
+.resaltado {
+  background: transparent;
+  box-shadow: none;
+}
+
+/* Listas dentro de tarjetas */
+.entry__title {
+  font-size: 1.4rem;
+  margin: 0 0 0.25rem 0;
+}
+.entry__meta {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-gray);
+  margin-bottom: 0.75rem;
+  border-left: 2px solid var(--notebook-line);
+  padding-left: 0.5rem;
+}
+.entry__list {
+  list-style: none;
+  padding-left: 0;
+  margin-top: 0.75rem;
+}
+.entry__list li {
+  padding-left: 1.5rem;
+  position: relative;
+  margin-bottom: 0.6rem;
+  font-family: var(--font-handwriting);
+}
+.entry__list li::before {
+  content: '✎';
+  position: absolute;
+  left: 0;
+  color: var(--notebook-line);
+  font-size: 1.1rem;
+}
+
+/* Skills */
+.skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+.skill-tag {
+  display: inline-block;
+  background: var(--postit-yellow);
+  padding: 0.4rem 0.7rem;
+  margin: 0.3rem;
+  font-family: var(--font-handwriting);
+  font-size: 0.9rem;
+  box-shadow: var(--shadow-postit);
+  transform: rotate(var(--r, -2deg));
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border-radius: 4px;
+}
+.skill-tag:hover {
+  transform: translateY(-2px) rotate(0deg);
+  box-shadow: var(--shadow-sticky);
+}
+
+/* Enlaces (Home) */
 .links-section p {
   margin: 0.75rem 0;
   padding: 0.75rem;
@@ -323,45 +381,13 @@ h3 {
   text-decoration: underline;
 }
 
-
-/* fin links-section */
-
-/* ===== SKILLS (estilo original) ===== */
-
-/* Contenedor de las habilidades (para que las etiquetas se envuelvan) */
-.skills {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-top: 0.5rem;
-}
-
-/* Etiqueta individual de habilidad */
-.skill-tag {
-  display: inline-block;
-  background: var(--postit-yellow);
-  padding: 0.4rem 0.7rem;
-  margin: 0.3rem;
-  font-family: var(--font-handwriting);
-  font-size: 0.9rem;
-  box-shadow: var(--shadow-postit);
-  transform: rotate(var(--r, -2deg));
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  border-radius: 4px; /* opcional, para darle un toque más redondeado */
-}
-
-.skill-tag:hover {
-  transform: translateY(-2px) rotate(0deg);
-  box-shadow: var(--shadow-sticky);
-}
-
+/* Grid de enlaces moderno */
 .links-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
   gap: 1rem;
   margin: 1rem 0;
 }
-
 .link-item {
   background: var(--postit-yellow);
   padding: 0.8rem 1rem;
@@ -372,12 +398,10 @@ h3 {
   font-size: 0.85rem;
   border-left: 4px solid var(--notebook-line);
 }
-
 .link-item:hover {
   transform: translateX(6px) rotate(0.5deg);
   box-shadow: var(--shadow-sticky);
 }
-
 .link-item a {
   text-decoration: none;
   color: var(--text-dark);
@@ -385,101 +409,12 @@ h3 {
   align-items: center;
   gap: 0.5rem;
 }
-
-/* Opcional: ícono antes de cada enlace */
 .link-item a::before {
   content: '📌';
   font-size: 0.9rem;
 }
 
-/* Tarjeta base (reemplaza o complementa a .resaltado) */
-.card {
-  background: var(--postit-yellow);
-  padding: 1.2rem 1.5rem;
-  margin-bottom: 1.5rem;
-  border-radius: 12px;
-  box-shadow: var(--shadow-sticky);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  position: relative;
-}
-
-/* Colores alternos para que parezcan notas adhesivas */
-.card:nth-child(odd) {
-  background: var(--postit-green);
-}
-.card:nth-child(even) {
-  background: var(--postit-blue);
-}
-
-/* Efecto esquina doblada */
-.card::before {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  width: 0;
-  height: 0;
-  border-style: solid;
-  border-width: 0 0 20px 20px;
-  border-color: transparent transparent rgba(0,0,0,0.06) transparent;
-  pointer-events: none;
-}
-
-.card:hover {
-  transform: rotate(1deg) translateY(-3px);
-  box-shadow: var(--shadow-sticky);
-}
-
-.resaltado {
-  /* background: var(--postit-yellow); */
-  padding: 1.2rem 1.5rem;
-  margin-bottom: 0.5rem;
-  border-radius: 12px;
-  /* box-shadow: var(--shadow-sticky);*/
-  transition: transform 0.2s, box-shadow 0.2s;
-  position: relative;
-}
-/* 
-.resaltado:nth-child(odd) { background: var(--postit-green); }
-.resaltado:nth-child(even) { background: var(--postit-blue); }
-
-*/
-.entry__title {
-  font-size: 1.4rem;
-  margin: 0 0 0.25rem 0;
-}
-
-.entry__meta {
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  color: var(--text-gray);
-  margin-bottom: 0.75rem;
-  border-left: 2px solid var(--notebook-line);
-  padding-left: 0.5rem;
-}
-
-.entry__list {
-  list-style: none;
-  padding-left: 0;
-  margin-top: 0.5rem;
-}
-
-.entry__list li {
-  padding-left: 1.5rem;
-  position: relative;
-  margin-bottom: 0.4rem;
-  font-family: var(--font-handwriting);
-}
-
-.entry__list li::before {
-  content: '✎';
-  position: absolute;
-  left: 0;
-  color: var(--notebook-line);
-  font-size: 1rem;
-}
-
-/* Formulario de contacto (estilo original con dimensiones fijas y centrado) */
+/* ===== FORMULARIO CONTACTO (POST‑IT CUADRADO) ===== */
 .contact-form-wrapper {
   flex: 1;
   display: flex;
@@ -490,20 +425,18 @@ h3 {
 }
 .contact-form {
   padding: 1.5rem;
-  width: 400px;
-  min-height: 300px;
+  width: 420px;
+  min-height: 360px;
   box-shadow: 0 6px 10px rgba(0,0,0,0.10), 0 18px 30px rgba(0,0,0,0.15);
   font-family: var(--font-handwriting);
   display: flex;
   flex-direction: column;
-  gap: 0.4rem;
+  gap: 0.5rem;
   transform: rotate(var(--rotate, -2deg));
-  background-size: 100% 24px;
+  background: linear-gradient(to top, var(--postit-yellow), transparent), #fff9c4e8;
   position: relative;
   transition: transform 0.3s ease;
-  background: 
-  linear-gradient(to top, var(--postit-yellow), transparent),
-  #fff9c4e8;  /* color base semitransparente */
+  border-radius: 12px;
 }
 .contact-form::before {
   content: "";
@@ -513,78 +446,53 @@ h3 {
   transform: translateX(-50%) rotate(-2deg);
   width: 70%;
   height: 35px;
-  background: rgba(160, 140, 100, 0.3);
+  background: var(--fiso);
+  border-radius: 4px;
   z-index: 2;
 }
 .contact-form label {
   font-size: 0.9rem;
-  color: #1e3a8a;
-  margin-top: 0.5rem;
+  color: var(--text-dark);
+  margin-top: 0.3rem;
 }
 .contact-form input,
 .contact-form textarea {
   border: none;
   background: transparent;
-  border-bottom: 1px solid rgba(30, 58, 138, 0.4);
+  border-bottom: 1px solid rgba(0,0,0,0.2);
   outline: none;
   font-family: var(--font-handwriting);
   font-size: 1rem;
-  color: #1e3a8a;
+  color: var(--text-dark);
   padding: 0.2rem 0;
 }
 .contact-form textarea {
-  min-height: 100px;
+  min-height: 80px;
   resize: none;
-  line-height: 1.5;
 }
 .contact-form input::placeholder,
 .contact-form textarea::placeholder {
-  color: rgba(30, 58, 138, 0.4);
-  font-family: var(--font-handwriting);
+  color: rgba(0,0,0,0.3);
 }
 .contact-form input[type="submit"] {
   margin-top: 1rem;
   background: transparent;
   border: none;
-  color: #1e3a8a;
   font-family: var(--font-handwriting);
   font-size: 1.1rem;
   cursor: pointer;
   text-align: right;
+  color: var(--text-dark);
 }
 .contact-form input[type="submit"]:hover {
   transform: translateX(3px);
 }
 
-
-
-/* Secciones y tarjetas */
-section {
-  background: transparent;
-  padding: 1rem;
-  margin-bottom: 0.2rem;
-  position: relative;
-}
-
-.resaltado p {
-  font-family: var(--font-mono);
-  font-size: 0.85rem;
-  padding: 0.75rem;
-  background: rgba(245, 169, 184, 0.1);
-  border-radius: 8px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  justify-content: center;
-}
-
-
-
-/* ===== FOOTER estilo libreta ===== */
+/* ===== FOOTER (sin blur) ===== */
 footer {
   margin-top: auto;
   padding: 1rem 1.5rem;
-  background: rgba(255, 255, 255, 0.7);  /* semitransparente para que se vea la cuadrícula */
+  background: rgba(255, 255, 255, 0.9);
   border-top: 2px dashed var(--notebook-grid);
   border-bottom: 1px solid var(--notebook-grid);
   font-family: var(--font-handwriting);
@@ -593,10 +501,7 @@ footer {
   text-align: center;
   position: relative;
   z-index: 5;
-  backdrop-filter: blur(2px); /* opcional: difumina un poco el fondo */
 }
-
-/* Opcional: simular una esquina doblada */
 footer::before {
   content: '';
   position: absolute;
@@ -609,49 +514,124 @@ footer::before {
   border-color: transparent transparent rgba(0,0,0,0.05) transparent;
   pointer-events: none;
 }
-
-
-/* Espaciado entre líneas del footer */
 footer p {
   margin: 0.25rem 0;
 }
 
-/* Si quieres que el footer tenga un post‑it despegado (opcional) */
-/* 
-footer {
-  background: var(--postit-yellow);
-  box-shadow: var(--shadow-sticky);
-  transform: rotate(-0.5deg);
+/* ===== UTILIDADES ADICIONALES ===== */
+.resaltado p {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  padding: 0.75rem;
+  background: rgba(243, 134, 156, 0.158);
   border-radius: 8px;
-  margin: 2rem 1rem 1rem 1rem;
-  width: calc(40% - 3rem);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
 }
-*/
+/* ===== SKILLS: ETIQUETAS COMPACTAS ESTILO POST-IT ===== */
 
-/* Responsive: ajusta padding en móvil */
-@media (max-width: 768px) {
-  footer {
-    padding: 0.75rem 1rem;
-    font-size: 0.75rem;
+/* Contenedor de categorías en dos columnas (para escritorio) */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+/* Cada categoría */
+.skill-category {
+  break-inside: avoid;
+}
+
+/* Contenedor de las etiquetas: flex wrap para que se ajusten al contenido */
+.skill-category .skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 0.75rem;
+}
+
+/* Etiqueta tipo post-it compacta */
+.skill-tag {
+  display: inline-block;
+  background: var(--postit-yellow);
+  padding: 0.3rem 0.8rem;    /* menos padding horizontal, más equilibrado */
+  font-family: var(--font-handwriting);
+  font-size: 0.9rem;
+  font-weight: 500;
+  box-shadow: var(--shadow-postit);
+  transform: rotate(var(--r, -1deg));
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border-radius: 6px;        /* ligeramente redondeado */
+  white-space: nowrap;       /* evita que el texto se rompa en varias líneas */
+  cursor: default;
+}
+
+/* Si quieres permitir que cuando no quepa en una línea se rompa (para móvil) */
+@media (max-width: 640px) {
+  .skill-tag {
+    white-space: normal;
+    text-align: center;
+  }
+  .skills-grid {
+    grid-template-columns: 1fr; /* una sola columna en móvil */
   }
 }
 
-/* Responsive */
-@media (max-width: 770px) {
-  .navbar {
-    gap: 0.2rem;
-    padding: 0 0.5rem;
-  }
-  .navbar__link {
-    padding: 0.35rem 0.9rem;
-    font-size: 0.75rem;
-    transform: scaleY(0.75);
-    margin: 0 2px;
-  }
-  .notebook-circles {
-    left: -4px;   /* antes estaba en 48px, lo desplazas más a la izquierda */
+.skill-tag:hover {
+  transform: translateY(-2px) rotate(0deg);
+  box-shadow: var(--shadow-sticky);
+}
+
+/* Raya vertical separadora entre columnas de skills */
+.skills-grid {
+  position: relative;
+}
+
+.skills-grid::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 3px;
+  background: var(--postit-orange);
+  opacity: 1;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+/* Listas */
+ul {
+  list-style: none;
+  padding-left: 20px;
+}
+
+li {
+  margin-bottom: 0.5rem;
+  padding-left: 1.5rem;
+  position: relative;
+}
+
+li::before {
+  content: '▹';
+  position: absolute;
+  left: 0;
+  color: #3b82f6;
+}
+
+/* En móvil (una columna) ocultamos la raya */
+@media (max-width: 700px) {
+  .skills-grid::after {
+    display: none;
   }
 }
+
+/* ===== MEDIA QUERIES (ordenadas, sin duplicados y con transiciones suaves) ===== */
+
+/* Móvil pequeño (hasta 460px) */
 @media (max-width: 460px) {
   .navbar {
     gap: 0.1rem;
@@ -663,16 +643,35 @@ footer {
     transform: scaleY(0.7);
     margin: 0 0.5px;
   }
+  .notebook-circles {
+    left: -4px;
+  }
+  .notebook-content::after {
+    left: 95px;
+  }
+  .skill-tag {
+    font-size: 0.8rem;
+    padding: 0.3rem 0.8rem;
+  }
+  .entry__title {
+    font-size: 1.2rem;
+  }
+  .contact-form {
+    width: 95%;
+    max-width: 350px;
+    padding: 1.2rem;
+  }
 }
+
+/* Móvil estándar (460px a 700px) */
 @media (min-width: 460px) {
   .notebook-content {
     margin: 0 0.2rem;
   }
   .notebook-page {
-    margin: 0 .2rem;
+    margin: 0 0.2rem;
   }
 }
-
 @media (min-width: 700px) {
   .notebook-content {
     margin: 0 2rem;
@@ -692,7 +691,27 @@ footer {
     margin-right: auto;
   }
 }
+
+/* Ocultar línea rosa en móvil (menos de 700px) */
+@media (max-width: 700px) {
+  .notebook-content::after {
+    display: none;
+  }
+}
+
+/* Ajustes para tablets y escritorio (760px o más) */
+@media (min-width: 760px) {
+  .page-content {
+    padding-left: 130px;  /* 110px (línea) + 20px de separación */
+  }
+}
+
+/* Ajustes generales para pantallas de hasta 768px */
 @media (max-width: 768px) {
+  footer {
+    padding: 0.75rem 1rem;
+    font-size: 0.75rem;
+  }
   .page-title {
     font-size: 1.6rem;
   }
@@ -706,29 +725,24 @@ footer {
     grid-template-columns: 1fr;
   }
   .contact-form {
-    padding: 1.2rem;
-    max-width: 95%;
+    width: 95%;
+    max-width: 400px;
   }
 }
 
-@media (max-width: 480px) {
-  .skill-tag {
-    font-size: 0.8rem;
-    padding: 0.3rem 0.8rem;
+/* Ajustes para el navbar en móvil (hasta 770px) */
+@media (max-width: 770px) {
+  .navbar {
+    gap: 0.2rem;
+    padding: 0 0.5rem;
   }
-  .entry__title {
-    font-size: 1.2rem;
+  .navbar__link {
+    padding: 0.35rem 0.9rem;
+    font-size: 0.75rem;
+    transform: scaleY(0.75);
+    margin: 0 2px;
   }
-}
-
-@media (min-width: 760px) {
-  .page-content {
-    padding-left: 140px; /* Ajusta este valor según la posición de la línea roja */
-  }
-}
-
-@media (max-width: 700px) {
-  .notebook-content::after {
-    display: none;   /* oculta la línea rosa */
+  .notebook-circles {
+    left: -4px;
   }
 }

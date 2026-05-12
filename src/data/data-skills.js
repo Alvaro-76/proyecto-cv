@@ -48,5 +48,25 @@ export const skills = [
         id: 10,
         name: "Blender",
         category: "Design"
+    },
+    {
+        id: 11,
+        name: "Node.js",
+        category: "Backend"
+    },
+    {
+        id: 12,
+        name: "C++",
+        category: "Backend"
+    },
+    {
+        id: 13,
+        name: "C#",
+        category: "Backend"
+    },
+    {
+        id: 14,
+        name: "Unity",
+        category: "Game Development"
     }
 ];
