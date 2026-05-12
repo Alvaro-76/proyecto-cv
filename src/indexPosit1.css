@@ -1,0 +1,675 @@
+/* index.css - Estilo Libreta con Marcadores y Cuadrícula Real */
+
+:root {
+  /* Colores pared */
+  --wall-bg: #dde0e7;
+  --wall-shadow: rgba(0,0,0,0.05);
+  
+  /* Colores libreta */
+  --notebook-bg: #f5f7fc;
+  --notebook-grid: #d0d8e8;
+  --notebook-line: #f5a9b8;
+  
+  /* Colores Post-it */
+  --postit-yellow: #fff9c4;
+  --postit-pink: #ffd1dc;
+  --postit-blue: #d4f1f9;
+  --postit-green: #d9f0e1;
+  --postit-orange: #ffe0b5;
+  
+  /* Colores texto */
+  --text-dark: #2c3e50;
+  --text-gray: #5a6c7e;
+  
+  /* Sombras */
+  --shadow-postit: 2px 2px 5px rgba(0,0,0,0.08);
+  --shadow-sticky: 0 4px 12px rgba(0,0,0,0.1);
+  --shadow-sticky-heavy: 0 8px 20px rgba(0,0,0,0.12);
+  
+  /* Fuentes */
+  --font-handwriting: 'Caveat', 'Segoe UI', cursive;
+  --font-mono: 'Courier New', 'SF Mono', monospace;
+  --font-sans: 'Segoe UI', 'Roboto', system-ui, sans-serif;
+  
+  /* Altura del header (ajusta este valor según necesites) */
+  --header-height: 170px;
+  font-size: 18px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--wall-bg);
+  font-family: var(--font-sans);
+  color: var(--text-dark);
+  line-height: 1.6;
+  position: relative;
+  min-height: 100vh;
+  font-size: 18px;
+}
+
+/* Contenedor de la hoja de libreta (se desplaza con el contenido) */
+.notebook-page {
+  position: relative;
+  background: var(--notebook-bg);
+  min-height: 100vh;
+  margin: 0 3rem 0 4rem;
+  z-index: 1;
+}
+
+/* Patrón de cuadrícula - EMPIEZA DESPUÉS DEL HEADER */
+.notebook-page::before {
+  content: '';
+  position: absolute;
+  top: var(--header-height); /* Comienza después del header */
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    linear-gradient(to right, var(--notebook-grid) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--notebook-grid) 1px, transparent 1px);
+  background-size: 16px 16px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Línea rosa del margen izquierdo - EMPIEZA DESPUÉS DEL HEADER */
+.notebook-page::after {
+  content: '';
+  position: absolute;
+  top: var(--header-height); /* Comienza después del header */
+  left: 110px;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, 
+    var(--notebook-line) 0%,
+    var(--notebook-line) 100%);
+  background-size: 3px 20px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Círculos grises en el margen izquierdo - EMPIEZAN DESPUÉS DEL HEADER */
+.notebook-circles {
+  position: absolute;
+  top: var(--header-height); /* Comienza después del header */
+  left: 50px;
+  bottom: 0;
+  width: 20px;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.notebook-circles::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at center, var(--wall-bg) 9px, transparent 9px);
+  background-size: 34px 34px;
+  background-position: -7px 18px;
+  background-repeat: repeat-y;
+}
+
+/* Main Layout - todo dentro de la página de cuaderno */
+main {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem;
+  position: relative;
+  z-index: 3;
+}
+
+/* El Outlet ocupa espacio principal */
+main > :nth-child(2) {
+  flex: 1;
+}
+
+/* ============ HEADER - TÍTULO POST-IT (SIN CUADRÍCULA) ============ */
+header {
+  position: relative;
+  margin-bottom: 3rem;
+  padding-top: 1rem;
+  background: var(--wall-bg); /* Fondo sólido para tapar cuadrícula */
+  z-index: 10;
+}
+
+/* Título Post-it flotante */
+header h1 {
+  background: var(--postit-yellow);
+  padding: 0.8rem 1.8rem;
+  margin: -2rem 0 0 0;
+  font-family: var(--font-handwriting);
+  font-size: 2.2rem;
+  font-weight: normal;
+  color: var(--text-dark);
+  border-radius: 4px 12px 12px 4px;
+  box-shadow: var(--shadow-sticky);
+  position: relative;
+  display: inline-block;
+  transform: rotate(-1deg);
+  z-index: 20;
+  border-left: 4px solid var(--notebook-line);
+}
+
+/* Cinta adhesiva */
+header h1::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: 30%;
+  width: 40%;
+  height: 30px;
+  background: rgba(160, 140, 100, 0.3);
+  border-radius: 2px;
+  transform: rotate(-2deg);
+}
+
+/* Subtítulo */
+header .subtitle {
+  margin-top: 0.75rem;
+  margin-left: 1rem;
+  font-family: var(--font-handwriting);
+  font-size: 1rem;
+  color: var(--text-gray);
+  font-style: italic;
+  position: relative;
+  display: inline-block;
+}
+
+/* ============ NAVBAR - MARCADORES CON ANCLAJE FIJO ============ */
+.navbar {
+  display: flex;
+  gap: 0;
+  margin-left: 2rem;
+  margin-top: 0.5rem;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 15;
+  align-items: flex-start;
+}
+
+.navbar__link {
+  position: relative;
+  background: var(--postit-blue);
+  color: var(--text-dark);
+  text-decoration: none;
+  padding: 0.6rem 1.5rem;
+  font-family: var(--font-handwriting);
+  font-size: 1rem;
+  font-weight: 500;
+  border-radius: 8px 8px 0 0;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  margin-right: 4px;
+  box-shadow: 0 -2px 6px rgba(0,0,0,0.08), inset 0 1px 0 rgba(255,255,255,0.5);
+  cursor: pointer;
+  border-bottom: none;
+  
+  transform-origin: bottom;
+  transform: scaleY(0.65);
+}
+
+/* Colores diferentes para cada marcador */
+.navbar__link:nth-child(1) { background: var(--postit-pink); }
+.navbar__link:nth-child(2) { background: var(--postit-yellow); }
+.navbar__link:nth-child(3) { background: var(--postit-green); }
+.navbar__link:nth-child(4) { background: var(--postit-blue); }
+.navbar__link:nth-child(5) { background: var(--postit-orange); }
+
+/* En hover - se estira hacia ARRIBA (la parte inferior permanece fija) */
+.navbar__link:hover {
+  transform: scaleY(0.9);
+  box-shadow: 0 -4px 10px rgba(0,0,0,0.12), inset 0 1px 0 rgba(255,255,255,0.6);
+  z-index: 25;
+}
+
+/* Marcador ACTIVO - completamente estirado */
+.navbar__link.active {
+  transform: scaleY(1);
+  box-shadow: 0 -6px 14px rgba(0,0,0,0.15), inset 0 1px 0 rgba(255,255,255,0.7);
+  z-index: 30;
+  filter: brightness(1.02);
+}
+
+/* Sombra que da profundidad - más intensa en activo/hover */
+.navbar__link::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 10%;
+  width: 80%;
+  height: 8px;
+  background: rgba(0,0,0,0.1);
+  filter: blur(4px);
+  border-radius: 50%;
+  transition: all 0.25s ease;
+  opacity: 0.5;
+}
+
+.navbar__link.active::after {
+  opacity: 1;
+  bottom: -7px;
+  width: 85%;
+  left: 7.5%;
+  filter: blur(5px);
+}
+
+.navbar__link:hover::after {
+  opacity: 0.8;
+  bottom: -6px;
+}
+
+/* ============ FOOTER ============ */
+footer {
+  margin-top: 3rem;
+  padding: 1.5rem;
+  text-align: center;
+  position: relative;
+  background: rgba(255,255,255,0.5);
+  border-radius: 12px;
+  font-family: var(--font-handwriting);
+  font-size: 0.9rem;
+  color: var(--text-gray);
+  z-index: 5;
+  border-top: 1px dashed var(--notebook-grid);
+}
+
+/* ============ SECTIONS ============ */
+section {
+  background: transparent;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+/* Tipografía */
+h1, h2, h3 {
+  font-family: var(--font-handwriting);
+}
+
+h2 {
+  font-size: 1.8rem;
+  color: var(--text-dark);
+  margin-bottom: 1rem;
+  position: relative;
+  display: inline-block;
+  border-bottom: 2px dashed var(--notebook-line);
+}
+
+h3 {
+  font-size: 1.2rem;
+  margin: 1rem 0 0.5rem;
+  color: var(--text-dark);
+}
+
+/* Sección de contacto */
+/* section:first-child p */
+.resaltado p{
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  padding: 0.75rem;
+  background: rgba(245, 169, 184, 0.1);
+  border-radius: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+}
+
+/* Links Section - Post-its pequeños */
+.links-section p {
+  margin: 0.75rem 0;
+  padding: 0.75rem;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: var(--postit-yellow);
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  border-left: 3px solid var(--notebook-line);
+  box-shadow: var(--shadow-postit);
+}
+
+.links-section p::before {
+  content: '📌';
+  font-size: 1rem;
+}
+
+.links-section p:hover {
+  transform: translateX(8px);
+  box-shadow: var(--shadow-sticky);
+}
+
+.links-section a {
+  color: var(--text-dark);
+  text-decoration: none;
+  flex: 1;
+  font-family: var(--font-mono);
+}
+
+.links-section a:hover {
+  text-decoration: underline;
+}
+
+/* Cards - estilo notas adhesivas */
+.card {
+  background: var(--postit-blue);
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 8px;
+  box-shadow: var(--shadow-postit);
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+/* Esquina doblada en cards */
+.card::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 0 16px 16px;
+  border-color: transparent transparent rgba(0,0,0,0.04) transparent;
+}
+
+.card:hover {
+  transform: rotate(1deg) translateY(-2px);
+  box-shadow: var(--shadow-sticky);
+}
+
+.card:nth-child(odd) { background: var(--postit-green); }
+.card:nth-child(even) { background: var(--postit-yellow); }
+
+/* Skill tags */
+.skill-tag {
+  display: inline-block;
+  background: var(--postit-yellow);
+  padding: 0.4rem 0.7rem;
+  margin: 0.3rem;
+  font-family: var(--font-handwriting);
+  box-shadow: var(--shadow-postit);
+  transform: rotate(var(--r, -2deg));
+}
+
+.skill-tag:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sticky);
+}
+
+/* Date badges */
+.date-badge {
+  font-size: 0.7rem;
+  font-family: var(--font-mono);
+  background: rgba(0,0,0,0.04);
+  padding: 0.2rem 0.7rem;
+  border-radius: 20px;
+  display: inline-block;
+  margin-bottom: 0.5rem;
+}
+
+/* Listas estilo cuaderno */
+ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+li {
+  margin-bottom: 0.5rem;
+  padding-left: 1.5rem;
+  position: relative;
+  font-family: var(--font-handwriting);
+}
+
+li::before {
+  content: '☐';
+  position: absolute;
+  left: 0;
+  color: var(--notebook-line);
+  font-size: 1rem;
+}
+
+li:hover::before {
+  content: '☒';
+  color: var(--postit-pink);
+}
+
+/* Enlaces generales */
+a {
+  color: var(--text-dark);
+  text-decoration: none;
+}
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 768px) {
+  .notebook-page {
+    margin: 0 0.5rem;
+  }
+  
+  .notebook-page::after {
+    left: 30px;
+  }
+  
+  .notebook-circles {
+    left: 15px;
+  }
+  
+  main {
+    padding: 1rem;
+  }
+  
+  header h1 {
+    font-size: 1.4rem;
+    padding: 0.5rem 1.2rem;
+  }
+  
+  .navbar {
+    margin-left: 0.5rem;
+  }
+  
+  .navbar__link {
+    padding: 0.45rem 1rem;
+    font-size: 0.8rem;
+    transform: scaleY(0.7);
+  }
+  
+  .navbar__link:hover {
+    transform: scaleY(0.9);
+  }
+  
+  section {
+    padding: 1rem;
+  }
+  
+  h2 {
+    font-size: 1.4rem;
+  }
+
+  :root {
+    --header-height: 220px;
+  }
+  
+}
+
+/* ============ PRINT ============ */
+@media print {
+  body {
+    background: white;
+  }
+  
+  .notebook-page {
+    margin: 0;
+    box-shadow: none;
+  }
+  
+  .notebook-page::before,
+  .notebook-page::after,
+  .notebook-circles,
+  .navbar {
+    display: none;
+  }
+  
+  section {
+    page-break-inside: avoid;
+  }
+}
+
+.notebook-page {
+  background: linear-gradient(
+    to bottom,
+    transparent 0px,
+    transparent var(--header-height),
+    var(--notebook-bg) var(--header-height)
+  );
+}
+
+.contact-form {
+  background: var(--postit-yellow);
+  padding: 2rem;
+  
+  /* tamaño: más ancho que alto */
+  width: 420px;
+  min-height: 320px;
+
+  box-shadow: var(--shadow-postit);
+  font-family: var(--font-handwriting);
+  transform: rotate(-1deg);
+
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+
+  /* centrado del contenido interno */
+  justify-content: center;
+
+  /* efecto libreta */
+  background-image: linear-gradient(to bottom, rgba(0,0,0,0.03) 1px, transparent 1px);
+  background-size: 100% 24px;
+}
+
+.page {
+  display: flex;
+  flex-direction: column;
+  min-height: 50vh;
+}
+.contact-form-wrapper {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem 1rem;
+  position: relative;
+}
+
+/* FORMULARIO estilo post-it */
+.contact-form {
+  background: #fff9c4d5;
+  padding: 2rem;
+  width: 420px;
+  min-height: 320px;
+
+  box-shadow:
+  0 6px 10px rgba(0, 0, 0, 0.10),
+  0 18px 30px rgba(0, 0, 0, 0.15);
+  font-family: var(--font-handwriting);
+
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+
+  transform: rotate(var(--rotate, -2deg));
+
+  /* efecto libreta 
+  background-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.03) 1px,
+    transparent 1px
+  );*/
+  background-size: 100% 24px;
+
+  position: relative;
+  transition: transform 0.3s ease;
+}
+
+/* CINTA ADHESIVA (correctamente anclada al form) */
+.contact-form::before {
+  content: "";
+  position: absolute;
+
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-2deg);
+
+  width: 70%;
+  height: 35px;
+
+  background: rgba(160, 140, 100, 0.3);
+
+  border-radius: 2px;
+  z-index: 2;
+}
+
+/* LABELS estilo boli azul */
+.contact-form label {
+  font-size: 0.9rem;
+  color: #1e3a8a;
+  margin-top: 0.5rem;
+}
+
+/* INPUTS estilo libreta */
+.contact-form input,
+.contact-form textarea {
+  border: none;
+  background: transparent;
+  border-bottom: 1px solid rgba(30, 58, 138, 0.4);
+  outline: none;
+
+  font-family: var(--font-handwriting);
+  font-size: 1rem;
+  color: #1e3a8a;
+
+  padding: 0.2rem 0;
+}
+
+/* textarea más natural */
+.contact-form textarea {
+  min-height: 100px;
+  resize: none;
+  line-height: 1.5;
+}
+
+/* placeholder suave */
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+  color: rgba(30, 58, 138, 0.4);
+  font-family: var(--font-handwriting);
+}
+
+/* botón estilo escrito a mano */
+.contact-form input[type="submit"] {
+  margin-top: 1rem;
+  background: transparent;
+  border: none;
+
+  color: #1e3a8a;
+  font-family: var(--font-handwriting);
+  font-size: 1.1rem;
+
+  cursor: pointer;
+  text-align: right;
+}
+
+/* hover suave */
+.contact-form input[type="submit"]:hover {
+  transform: translateX(3px);
+}
