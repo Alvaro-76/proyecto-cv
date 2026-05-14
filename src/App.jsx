@@ -24,10 +24,10 @@ function App() {
         <Routes>
           <Route element={<MainLayout />}>
             <Route index element={<Home />} />
-            <Route path="Experience" element={<Experience />} />
-            <Route path="Education" element={<Education />} />
-            <Route path="Skills" element={<Skills />} />          
-            <Route path="contact" element={<Contact />} />
+            <Route path="/experience" element={<Experience />} />
+            <Route path="/education" element={<Education />} />
+            <Route path="/skills" element={<Skills />} />          
+            <Route path="/contact" element={<Contact />} />
             <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>
