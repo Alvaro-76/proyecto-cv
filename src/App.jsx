@@ -8,8 +8,8 @@ import Education from './pages/Education.jsx'
 import Skills from './pages/Skills.jsx'
 import Contact from './pages/Contact.jsx'
 import NotFound from './pages/NotFound.jsx'
-import Header from "./Components/Header.jsx"
-import Footer from "./Components/Footer.jsx"
+import Header from "./components/Header.jsx"
+import Footer from "./components/Footer.jsx"
 
 function App() {
 
