@@ -1,5 +1,5 @@
 // pages/Home.jsx
-import { about } from "../data/data-about"
+import { about } from "../data/data-about.js"
 
 function Home() {
   return (
