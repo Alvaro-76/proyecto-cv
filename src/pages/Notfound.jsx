@@ -18,6 +18,7 @@ function NotFound() {
         <p className="error-message">
           ¡Ups! Esta página no es de mi currículum.
         </p>
+        <p>{" "}</p>
         <Link to="/" className="back-home">
           ← Volver al inicio
         </Link>
