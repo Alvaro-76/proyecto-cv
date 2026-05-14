@@ -436,7 +436,6 @@ section {
   background: linear-gradient(to top, var(--postit-yellow), transparent), #fff9c4e8;
   position: relative;
   transition: transform 0.3s ease;
-  border-radius: 12px;
 }
 .contact-form::before {
   content: "";
@@ -563,7 +562,6 @@ footer p {
   box-shadow: var(--shadow-postit);
   transform: rotate(var(--r, -1deg));
   transition: transform 0.2s ease, box-shadow 0.2s ease;
-  border-radius: 6px;        /* ligeramente redondeado */
   white-space: nowrap;       /* evita que el texto se rompa en varias líneas */
   cursor: default;
 }
@@ -896,5 +894,3 @@ body.page-404 footer {
 body.page-404 footer::before {
   display: none;
 }
-
-/* Opcional: si quieres que el texto del footer tenga el mismo color que el de la pared, mantén var(--text-gray) */
