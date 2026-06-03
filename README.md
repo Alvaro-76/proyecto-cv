@@ -1,16 +1,53 @@
-# React + Vite
+# Portfolio CV
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Mi portafolio personal hecho con React y Vite. Es una web con diseño de cuaderno que muestra mi experiencia, educación, habilidades y datos de contacto de forma sencilla y bonita.
 
-Currently, two official plugins are available:
+**[Ver demo en vivo](https://alvaro-76.github.io/proyecto-cv/)**
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Qué tiene
 
-## React Compiler
+- **Inicio** — Una breve presentación mía
+- **Experiencia** — Mi trayectoria profesional
+- **Educación** — Mi formación académica
+- **Habilidades** — Las tecnologías que domino
+- **Contacto** — Un formulario fictício para escribir
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Tecnologías usadas
 
-## Expanding the ESLint configuration
+- React + Vite
+- React Router
+- Despliegue con GitHub Pages
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Estructura
+
+```
+src/
+├── components/    # Header, Footer y NavBar
+├── data/          # Archivos JS con toda la info del CV
+├── layouts/       # Layout principal con rutas
+├── pages/         # Cada sección de la web
+└── assets/        # Imágenes y recursos
+```
+
+## Para desarrollar
+
+```bash
+npm install
+npm run dev
+```
+
+## Para desplegar
+
+```bash
+npm run build
+npm run deploy
+```
+
+## Autor
+
+**Álvaro Blanco Alarcón** — Desarrollador autodidacta con experiencia en desarrollo de software y videojuegos.
+
+- [GitHub](https://github.com/Alvaro-76)
+- [LinkedIn](https://linkedin.com/in/alvaro-blanco-alarcon-4f2019/)
+- [itch.io](https://kodaygames.itch.io/)
+- [Blog](https://devcpp-allegro.blogspot.com/)
