@@ -11,7 +11,7 @@ console.log(window.location.hostname)
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <BrowserRouter basename="/proyecto-cv">
+    <BrowserRouter basename={basename}>
         <App />
     </BrowserRouter>    
   </StrictMode>,
