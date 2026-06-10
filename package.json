@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-    "scripts": {
+  "scripts": {
     "dev": "vite",
     "build:ghpages": "vite build --config vite.config.ghpages.js && copy dist\\index.html dist\\404.html",
     "build:vercel": "vite build --config vite.config.vercel.js",
